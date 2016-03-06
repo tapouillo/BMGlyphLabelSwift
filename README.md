@@ -73,6 +73,7 @@ This is the same usage as SKSpriteNode. CGFloat value ranging from 0.0 to 1.0, e
 NSString object. You can change this to change the text of the label.
 
 Usage:
+
 	label!.setGlyphText("-- justify --\ncenter")
     label!.setTextJustify(BMGlyphLabel.BMGlyphJustify.Center)
 
