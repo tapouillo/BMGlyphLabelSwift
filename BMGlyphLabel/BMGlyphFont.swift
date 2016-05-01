@@ -18,7 +18,7 @@ public class BMGlyphFont: NSObject, NSXMLParserDelegate {
     var charsTextures: [NSObject : AnyObject]
     var textureAtlas: SKTextureAtlas
 
-    public func fontWithName(name: String) -> BMGlyphFont {
+    public class func fontWithName(name: String) -> BMGlyphFont {
         return BMGlyphFont(name: name)
     }
     
