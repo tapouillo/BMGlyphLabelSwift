@@ -10,7 +10,7 @@ import Foundation
 import SpriteKit
 
 
-class BMGlyphFont: NSObject, NSXMLParserDelegate {
+public class BMGlyphFont: NSObject, NSXMLParserDelegate {
     
     var lineHeight: Int
     var kernings: [NSObject : AnyObject]
@@ -18,11 +18,11 @@ class BMGlyphFont: NSObject, NSXMLParserDelegate {
     var charsTextures: [NSObject : AnyObject]
     var textureAtlas: SKTextureAtlas
 
-    func fontWithName(name: String) -> BMGlyphFont {
+    public func fontWithName(name: String) -> BMGlyphFont {
         return BMGlyphFont(name: name)
     }
     
-    init(name: String) {
+    public init(name: String) {
             lineHeight = 0
             kernings = [NSObject : AnyObject]()
             chars = [NSObject : AnyObject]()
@@ -108,7 +108,7 @@ class BMGlyphFont: NSObject, NSXMLParserDelegate {
         return self.textureAtlas.textureNamed("\(charId)")
     }
     
-    func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
+    public func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
     
         if (elementName == "kerning") {
             let first: Int = Int(attributeDict["first"]!)!

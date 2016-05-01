@@ -17,38 +17,38 @@ import SpriteKit
 //  Copyright (c) 2013 Stéphane QUERAUD. All rights reserved.
 //
 
-class BMGlyphLabel: SKNode {
+public class BMGlyphLabel: SKNode {
     
     
-    enum BMGlyphHorizontalAlignment : Int {
+    public enum BMGlyphHorizontalAlignment : Int {
         case Centered = 1
         case Right = 2
         case Left = 3
     }
     
-    enum BMGlyphVerticalAlignment : Int {
+    public enum BMGlyphVerticalAlignment : Int {
         case Middle = 1
         case Top = 2
         case Bottom = 3
     }
     
-    enum BMGlyphJustify : Int {
+    public enum BMGlyphJustify : Int {
         case Left = 1
         case Right = 2
         case Center = 3
     }
     
-    var text: String!
-    var horizontalAlignment: BMGlyphHorizontalAlignment
-    var verticalAlignment: BMGlyphVerticalAlignment
-    var textJustify: BMGlyphJustify
-    var color: SKColor
-    var colorBlendFactor: CGFloat
-    var totalSize: CGSize!
-    var font : BMGlyphFont!
+    private var text: String!
+    private var horizontalAlignment: BMGlyphHorizontalAlignment
+    private var verticalAlignment: BMGlyphVerticalAlignment
+    private var textJustify: BMGlyphJustify
+    private var color: SKColor
+    private var colorBlendFactor: CGFloat
+    private var totalSize: CGSize!
+    private var font : BMGlyphFont!
     
     
-     init(txt: String, fnt: BMGlyphFont) {
+     public init(txt: String, fnt: BMGlyphFont) {
         horizontalAlignment = BMGlyphHorizontalAlignment.Centered
         verticalAlignment = BMGlyphVerticalAlignment.Middle
         textJustify = BMGlyphJustify.Left
@@ -60,34 +60,34 @@ class BMGlyphLabel: SKNode {
         setGlyphText(txt)
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
        
         fatalError("init(coder:) has not been implemented")
     }
 
     
-    func setTextJustify(newTextJustify: BMGlyphJustify) {
+    public func setTextJustify(newTextJustify: BMGlyphJustify) {
         if textJustify != newTextJustify {
             self.textJustify = newTextJustify
             self.justifyText()
         }
     }
     
-    func setHorizontalAlignment(newAlign: BMGlyphHorizontalAlignment) {
+    public func setHorizontalAlignment(newAlign: BMGlyphHorizontalAlignment) {
         if horizontalAlignment != newAlign {
             self.horizontalAlignment = newAlign
             self.justifyText()
         }
     }
     
-    func setVerticalAlignment(newAlign: BMGlyphVerticalAlignment) {
+    public func setVerticalAlignment(newAlign: BMGlyphVerticalAlignment) {
         if verticalAlignment != newAlign {
             self.verticalAlignment = newAlign
             self.justifyText()
         }
     }
     
-    func setGlyphText(newText: String) {
+    public func setGlyphText(newText: String) {
         if !(text == newText) {
             self.text = newText
             self.updateLabel()
@@ -227,7 +227,7 @@ class BMGlyphLabel: SKNode {
         self.totalSize = size
     }
     
-    func setGlyphColor(color: SKColor) {
+    public func setGlyphColor(color: SKColor) {
         self.color = color
         for letter in self.children {
             (letter as! SKSpriteNode).color = color
@@ -235,7 +235,7 @@ class BMGlyphLabel: SKNode {
        
     }
     
-    func setGlyphColorBlendFactor(var colorBlendFactor: CGFloat) {
+    public func setGlyphColorBlendFactor(var colorBlendFactor: CGFloat) {
         colorBlendFactor = min(colorBlendFactor, 1.0)
         colorBlendFactor = max(colorBlendFactor, 0.0)
         self.colorBlendFactor = colorBlendFactor
