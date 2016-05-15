@@ -56,6 +56,7 @@ class BMGlyphLabel: SKNode {
         colorBlendFactor = 1.0;
         font = fnt
         text = ""
+        totalSize = CGSizeMake(0, 0)
         super.init()
         setGlyphText(txt)
     }
