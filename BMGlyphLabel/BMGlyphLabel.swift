@@ -17,46 +17,46 @@ import SpriteKit
 //  Copyright (c) 2013 Stéphane QUERAUD. All rights reserved.
 //
 
-public class BMGlyphLabel: SKNode {
+open class BMGlyphLabel: SKNode {
     
     
     public enum BMGlyphHorizontalAlignment : Int {
-        case Centered = 1
-        case Right = 2
-        case Left = 3
+        case centered = 1
+        case right = 2
+        case left = 3
     }
     
     public enum BMGlyphVerticalAlignment : Int {
-        case Middle = 1
-        case Top = 2
-        case Bottom = 3
+        case middle = 1
+        case top = 2
+        case bottom = 3
     }
     
     public enum BMGlyphJustify : Int {
-        case Left = 1
-        case Right = 2
-        case Center = 3
+        case left = 1
+        case right = 2
+        case center = 3
     }
     
-    private var text: String!
-    private var horizontalAlignment: BMGlyphHorizontalAlignment
-    private var verticalAlignment: BMGlyphVerticalAlignment
-    private var textJustify: BMGlyphJustify
-    private var color: SKColor
-    private var colorBlendFactor: CGFloat
-    private var totalSize: CGSize!
-    private var font : BMGlyphFont!
+    fileprivate var text: String!
+    fileprivate var horizontalAlignment: BMGlyphHorizontalAlignment
+    fileprivate var verticalAlignment: BMGlyphVerticalAlignment
+    fileprivate var textJustify: BMGlyphJustify
+    fileprivate var color: SKColor
+    fileprivate var colorBlendFactor: CGFloat
+    fileprivate var totalSize: CGSize!
+    fileprivate var font : BMGlyphFont!
     
     
      public init(txt: String, fnt: BMGlyphFont) {
-        horizontalAlignment = BMGlyphHorizontalAlignment.Centered
-        verticalAlignment = BMGlyphVerticalAlignment.Middle
-        textJustify = BMGlyphJustify.Left
+        horizontalAlignment = BMGlyphHorizontalAlignment.centered
+        verticalAlignment = BMGlyphVerticalAlignment.middle
+        textJustify = BMGlyphJustify.left
         color = SKColor(red: 1, green: 1, blue: 1, alpha: 1);
         colorBlendFactor = 1.0;
         font = fnt
         text = ""
-        totalSize = CGSizeMake(0, 0)
+        totalSize = CGSize(width: 0, height: 0)
         super.init()
         setGlyphText(txt)
     }
@@ -67,28 +67,28 @@ public class BMGlyphLabel: SKNode {
     }
 
     
-    public func setTextJustify(newTextJustify: BMGlyphJustify) {
+    open func setTextJustify(_ newTextJustify: BMGlyphJustify) {
         if textJustify != newTextJustify {
             self.textJustify = newTextJustify
             self.justifyText()
         }
     }
     
-    public func setHorizontalAlignment(newAlign: BMGlyphHorizontalAlignment) {
+    open func setHorizontalAlignment(_ newAlign: BMGlyphHorizontalAlignment) {
         if horizontalAlignment != newAlign {
             self.horizontalAlignment = newAlign
             self.justifyText()
         }
     }
     
-    public func setVerticalAlignment(newAlign: BMGlyphVerticalAlignment) {
+    open func setVerticalAlignment(_ newAlign: BMGlyphVerticalAlignment) {
         if verticalAlignment != newAlign {
             self.verticalAlignment = newAlign
             self.justifyText()
         }
     }
     
-    public func setGlyphText(newText: String) {
+    open func setGlyphText(_ newText: String) {
         if !(text == newText) {
             self.text = newText
             self.updateLabel()
@@ -100,61 +100,62 @@ public class BMGlyphLabel: SKNode {
     }
     
     func justifyText() {
-        var shift: CGPoint = CGPointZero
+        var shift: CGPoint = CGPoint.zero
         switch self.horizontalAlignment {
-        case BMGlyphHorizontalAlignment.Left:
+        case BMGlyphHorizontalAlignment.left:
             shift.x = 0
-        case BMGlyphHorizontalAlignment.Right:
+        case BMGlyphHorizontalAlignment.right:
             shift.x = -self.totalSize.width
-        case BMGlyphHorizontalAlignment.Centered:
+        case BMGlyphHorizontalAlignment.centered:
             shift.x = -self.totalSize.width / 2
         }
         
         switch self.verticalAlignment {
-        case BMGlyphVerticalAlignment.Bottom:
+        case BMGlyphVerticalAlignment.bottom:
             shift.y = -self.totalSize.height
-        case BMGlyphVerticalAlignment.Top:
+        case BMGlyphVerticalAlignment.top:
             shift.y = 0
-        case BMGlyphVerticalAlignment.Middle:
+        case BMGlyphVerticalAlignment.middle:
             shift.y = -self.totalSize.height / 2
         }
         
         for node in self.children  {
-            let originalPosition: CGPoint = ((node as! SKSpriteNode).userData?.objectForKey("originalPosition")?.CGPointValue)!
-            node.position = CGPointMake(originalPosition.x + shift.x, originalPosition.y - shift.y)
+            let originalPosition = (node as! SKSpriteNode).userData?.object(forKey: "originalPosition") as! CGPoint
+            node.position = CGPoint(x: originalPosition.x + shift.x, y: originalPosition.y - shift.y)
         }
-        if textJustify != BMGlyphJustify.Left {
+        if textJustify != BMGlyphJustify.left {
             var numberNodes: Int = 0
             var nodePosition: Int = 0
             var widthForLine: Int = 0
             var c: unichar
             var node: SKSpriteNode
-            for var i = 0; i <= self.text.characters.count; i++ {
+            let upperBound = self.text.characters.distance(from: self.text.characters.startIndex, to: self.text.characters.endIndex)
+            for i in 0...upperBound {
                 if i != self.text.characters.count {
-                    c = (self.text as NSString).characterAtIndex(i)
+                    c = (self.text as NSString).character(at: i)
                 }
                 else {
-                    c = "\n".characterAtIndex(0)
+                    c = "\n".utf16.first!
                 }
-                if c == "\n".characterAtIndex(0) {
+                if c == "\n".utf16.first {
                     if numberNodes > 0 {
                         while nodePosition < numberNodes {
                             
                             node = self.children[nodePosition] as! SKSpriteNode
-                            if textJustify == BMGlyphJustify.Right {
-                                node.position = CGPointMake( node.position.x + self.totalSize.width - CGFloat(widthForLine) + shift.x,  node.position.y)
+                            if textJustify == BMGlyphJustify.right {
+                                node.position = CGPoint( x: node.position.x + self.totalSize.width - CGFloat(widthForLine) + shift.x,  y: node.position.y)
                             }
                             else {
-                                node.position = CGPointMake(node.position.x + (self.totalSize.width - CGFloat(widthForLine)) / 2 + shift.x / 2, node.position.y)
+                                node.position = CGPoint(x: node.position.x + (self.totalSize.width - CGFloat(widthForLine)) / 2 + shift.x / 2, y: node.position.y)
                             }
-                            nodePosition++
+                            nodePosition += 1
                         }
                     }
                     widthForLine = 0
                 }
                 else {
                     node = self.children[numberNodes] as! SKSpriteNode
-                    numberNodes++
+                    numberNodes += 1
                     widthForLine = Int(node.position.x + node.size.width)
                 }
             }
@@ -163,18 +164,18 @@ public class BMGlyphLabel: SKNode {
     
     func updateLabel() {
         var lastCharId: unichar = 0
-        var size: CGSize = CGSizeZero
-        var pos: CGPoint = CGPointZero
+        var size: CGSize = CGSize.zero
+        var pos: CGPoint = CGPoint.zero
         var scaleFactor: CGFloat
-        scaleFactor = UIScreen.mainScreen().scale
+        scaleFactor = UIScreen.main.scale
         //scaleFactor = 1.0
         var letter: SKSpriteNode
         let childCount: Int = Int(self.children.count)
-        let linesCount: Int = self.text.componentsSeparatedByString("\n").count - 1
+        let linesCount: Int = self.text.components(separatedBy: "\n").count - 1
         //remove unused SKSpriteNode
         if self.text.characters.count - linesCount < childCount && childCount > 0 {
             var del: SKSpriteNode
-            for var j = childCount; j > self.text.characters.count - linesCount; j-- {
+            for j in ((self.text.characters.count - linesCount + 1)...childCount).reversed() {
                 del = self.children[j - 1] as! SKSpriteNode
                 del.removeFromParent()
             }
@@ -183,10 +184,10 @@ public class BMGlyphLabel: SKNode {
             size.height += (CGFloat(self.font.lineHeight) / scaleFactor)
         }
         var realCharCount: Int = 0
-        for var i = 0; i < self.text.characters.count; i++ {
+        for i in 0 ..< self.text.characters.count {
             
-            let c: unichar = (self.text as NSString).characterAtIndex(i)
-            if c == "\n".characterAtIndex(0) {
+            let c: unichar = (self.text as NSString).character(at: i)
+            if c == "\n".utf16.first {
                 pos.y -= CGFloat(self.font.lineHeight) / scaleFactor
                 size.height += CGFloat(self.font.lineHeight) / scaleFactor
                 pos.x = 0
@@ -210,25 +211,25 @@ public class BMGlyphLabel: SKNode {
                 }
                 letter.colorBlendFactor = colorBlendFactor
                 letter.color = color
-                letter.anchorPoint = CGPointZero
-                letter.position = CGPointMake(pos.x + CGFloat(self.font.xOffset(c) + self.font.kerningForFirst(lastCharId, second: c)) / scaleFactor, pos.y - (letter.size.height + CGFloat(self.font.yOffset(c)) / scaleFactor))
+                letter.anchorPoint = CGPoint.zero
+                letter.position = CGPoint(x: pos.x + CGFloat(self.font.xOffset(c) + self.font.kerningForFirst(lastCharId, second: c)) / scaleFactor, y: pos.y - (letter.size.height + CGFloat(self.font.yOffset(c)) / scaleFactor))
                
                 letter.userData = [
-                    "originalPosition" : NSValue(CGPoint: letter.position)
+                    "originalPosition" : letter.position
                 ]
                 
                 pos.x += CGFloat(self.font.xAdvance(c) + self.font.kerningForFirst(lastCharId, second: c)) / scaleFactor
                 if size.width < pos.x {
                     size.width = pos.x
                 }
-                realCharCount++
+                realCharCount += 1
             }
             lastCharId = c
         }
         self.totalSize = size
     }
     
-    public func setGlyphColor(color: SKColor) {
+    func setGlyphColor(_ color: SKColor) {
         self.color = color
         for letter in self.children {
             (letter as! SKSpriteNode).color = color
@@ -236,13 +237,14 @@ public class BMGlyphLabel: SKNode {
        
     }
     
-    public func setGlyphColorBlendFactor(var colorBlendFactor: CGFloat) {
-        colorBlendFactor = min(colorBlendFactor, 1.0)
-        colorBlendFactor = max(colorBlendFactor, 0.0)
-        self.colorBlendFactor = colorBlendFactor
+    func setGlyphColorBlendFactor(_ colorBlendFactor: CGFloat) {
+        var factor = colorBlendFactor
+        factor = min(factor, 1.0)
+        factor = max(factor, 0.0)
+        self.colorBlendFactor = factor
         
         for letter in self.children {
-            (letter as! SKSpriteNode).colorBlendFactor = colorBlendFactor
+            (letter as! SKSpriteNode).colorBlendFactor = factor
         }
         
     }

@@ -10,32 +10,32 @@ import Foundation
 import SpriteKit
 
 
-public class BMGlyphFont: NSObject, NSXMLParserDelegate {
+open class BMGlyphFont: NSObject, XMLParserDelegate {
     
     var lineHeight: Int
-    var kernings: [NSObject : AnyObject]
-    var chars: [NSObject : AnyObject]
-    var charsTextures: [NSObject : AnyObject]
+    var kernings: [AnyHashable: Any]
+    var chars: [AnyHashable: Any]
+    var charsTextures: [AnyHashable: Any]
     var textureAtlas: SKTextureAtlas
 
-    public class func fontWithName(name: String) -> BMGlyphFont {
+    open class func fontWithName(_ name: String) -> BMGlyphFont {
         return BMGlyphFont(name: name)
     }
     
     public init(name: String) {
             lineHeight = 0
-            kernings = [NSObject : AnyObject]()
-            chars = [NSObject : AnyObject]()
-            charsTextures = [NSObject : AnyObject]()
+            kernings = [AnyHashable: Any]()
+            chars = [AnyHashable: Any]()
+            charsTextures = [AnyHashable: Any]()
             textureAtlas = SKTextureAtlas(named: name)
             super.init()
         
             let fontFile: String = "\(name)\(getSuffixForDevice())"
         
-            let path: NSURL = NSBundle.mainBundle().URLForResource(fontFile, withExtension: "xml")!
-            let data: NSData = NSData(contentsOfURL: path)!
+            let path: URL = Bundle.main.url(forResource: fontFile, withExtension: "xml")!
+            let data: Data = try! Data(contentsOf: path)
         
-            let parser: NSXMLParser = NSXMLParser(data: data)
+            let parser: XMLParser = XMLParser(data: data)
             parser.delegate = self
             parser.parse()
     }
@@ -43,11 +43,11 @@ public class BMGlyphFont: NSObject, NSXMLParserDelegate {
     func getSuffixForDevice() -> String {
         var suffix: String = ""
         var scale: CGFloat
-        if (UIScreen.mainScreen().respondsToSelector("nativeScale")) {
-            scale = UIScreen.mainScreen().nativeScale
+        if (UIScreen.main.responds(to: #selector(getter: UIScreen.nativeScale))) {
+            scale = UIScreen.main.nativeScale
         }
         else {
-            scale = UIScreen.mainScreen().scale
+            scale = UIScreen.main.scale
         }
         if scale == 2.0 {
             suffix = "@2x"
@@ -59,7 +59,7 @@ public class BMGlyphFont: NSObject, NSXMLParserDelegate {
         return suffix
     }
     
-    func xAdvance(charId: unichar) -> Int {
+    func xAdvance(_ charId: unichar) -> Int {
         let v = self.chars["xadvance_\(Int(charId))"]
         
         if (v != nil) {
@@ -70,7 +70,7 @@ public class BMGlyphFont: NSObject, NSXMLParserDelegate {
         }
     }
     
-    func xOffset(charId: unichar) -> Int {
+    func xOffset(_ charId: unichar) -> Int {
         let v = self.chars["xoffset_\(Int(charId))"]
         
         if (v != nil) {
@@ -81,7 +81,7 @@ public class BMGlyphFont: NSObject, NSXMLParserDelegate {
         }
     }
     
-    func yOffset(charId: unichar) -> Int {
+    func yOffset(_ charId: unichar) -> Int {
         let v = self.chars["yoffset_\(Int(charId))"]
         
         if (v != nil) {
@@ -92,7 +92,7 @@ public class BMGlyphFont: NSObject, NSXMLParserDelegate {
         }
     }
     
-    func kerningForFirst(first: unichar, second: unichar) -> Int {
+    func kerningForFirst(_ first: unichar, second: unichar) -> Int {
         
         let v = self.kernings["\(Int(first))/\(Int(second))"]
         
@@ -104,11 +104,11 @@ public class BMGlyphFont: NSObject, NSXMLParserDelegate {
         }
     }
     
-    func textureFor(charId: Int) -> SKTexture {
+    func textureFor(_ charId: Int) -> SKTexture {
         return self.textureAtlas.textureNamed("\(charId)")
     }
     
-    public func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
+    open func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
     
         if (elementName == "kerning") {
             let first: Int = Int(attributeDict["first"]!)!
