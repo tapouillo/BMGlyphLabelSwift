@@ -22,22 +22,25 @@ class GameScene: SKScene {
         font  = BMGlyphFont(name:"chrome")
         label = BMGlyphLabel(txt: "bmGlyph\nswift", fnt: font!)
         
-        label!.position = CGPointMake(self.frame.midX, self.frame.midY);
+        label!.position = CGPoint(x: self.frame.midX,y: self.frame.midY);
         
         self.addChild(label!)
         
         
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-       /* Called when a touch begins */
-        
-        label!.setGlyphText("-- justify --\ncenter")
-        label!.setTextJustify(BMGlyphLabel.BMGlyphJustify.Center)
-        
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touch = touches.first {
+            label!.setGlyphText("-- justify --\ncenter")
+            label!.setTextJustify(BMGlyphLabel.BMGlyphJustify.center)
+            
+            // ...
+        }
+        super.touchesBegan(touches, with: event)
     }
-   
-    override func update(currentTime: CFTimeInterval) {
+    
+    
+    override func update(_ currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
     }
 }
