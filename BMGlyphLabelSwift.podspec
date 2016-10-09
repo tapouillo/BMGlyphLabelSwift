@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'BMGlyphLabelSwift'
-  s.version      = '0.1.1'
+  s.version      = '0.1.2'
   s.summary      = 'Use bitmap fonts generated from the bmGlyph app in SpriteKit - Swift Version'
   s.author = {
     'Stéphane Queraud' => 'stephane@sovapps.com'
