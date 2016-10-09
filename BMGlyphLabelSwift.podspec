@@ -1,3 +1,5 @@
+
+
 Pod::Spec.new do |s|
   s.name         = 'BMGlyphLabelSwift'
   s.version      = '0.1.2'
@@ -18,4 +20,6 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '8.0'
   s.ios.frameworks = 'SpriteKit'
   s.requires_arc = true
+
+
 end

@@ -14,15 +14,15 @@ class GameScene: SKScene {
     var font: BMGlyphFont?
     var label: BMGlyphLabel?
     
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         /* Setup your scene here */
         
-        self.backgroundColor = SKColor.blackColor()
+        self.backgroundColor = SKColor.black
         
         font  = BMGlyphFont(name:"chrome")
         label = BMGlyphLabel(txt: "bmGlyph\nswift", fnt: font!)
         
-        label!.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+        label!.position = CGPointMake(self.frame.midX, self.frame.midY);
         
         self.addChild(label!)
         

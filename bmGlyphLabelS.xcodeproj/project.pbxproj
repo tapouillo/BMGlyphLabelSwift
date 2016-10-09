@@ -373,16 +373,20 @@
 					};
 					E1F2B4571CD5B56600CBB385 = {
 						CreatedOnToolsVersion = 7.3;
+						LastSwiftMigration = 0800;
 					};
 					F85CB1391C78C3BC00A9BD9D = {
 						CreatedOnToolsVersion = 7.0.1;
+						LastSwiftMigration = 0800;
 					};
 					F85CB1511C78C3BC00A9BD9D = {
 						CreatedOnToolsVersion = 7.0.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = F85CB1391C78C3BC00A9BD9D;
 					};
 					F85CB15C1C78C3BC00A9BD9D = {
 						CreatedOnToolsVersion = 7.0.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = F85CB1391C78C3BC00A9BD9D;
 					};
 				};
@@ -609,6 +613,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.nacrossweb.BMGlyphLabelSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -630,6 +635,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.nacrossweb.BMGlyphLabelSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -727,6 +733,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sovapps.bmGlyphLabelS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -739,6 +746,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sovapps.bmGlyphLabelS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -751,6 +759,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sovapps.bmGlyphLabelSTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/bmGlyphLabelS.app/bmGlyphLabelS";
 			};
 			name = Debug;
@@ -763,6 +772,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sovapps.bmGlyphLabelSTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/bmGlyphLabelS.app/bmGlyphLabelS";
 			};
 			name = Release;
@@ -775,6 +785,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sovapps.bmGlyphLabelSUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = bmGlyphLabelS;
 				USES_XCTRUNNER = YES;
 			};
@@ -787,6 +798,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sovapps.bmGlyphLabelSUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = bmGlyphLabelS;
 				USES_XCTRUNNER = YES;
 			};
@@ -802,6 +814,7 @@
 				E1F2B44F1CD5B51000CBB385 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E1F2B4611CD5B56600CBB385 /* Build configuration list for PBXNativeTarget "BMGlyphLabelSwift" */ = {
 			isa = XCConfigurationList;
@@ -810,6 +823,7 @@
 				E1F2B4631CD5B56600CBB385 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F85CB1351C78C3BC00A9BD9D /* Build configuration list for PBXProject "bmGlyphLabelS" */ = {
 			isa = XCConfigurationList;
